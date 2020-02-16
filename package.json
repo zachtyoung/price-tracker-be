@@ -1,0 +1,24 @@
+{
+  "name": "price-tracker",
+  "version": "1.0.0",
+  "description": "price tracker",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zach Young",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.8",
+    "bcryptjs": "^2.4.3",
+    "cron": "^1.8.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.7",
+    "knex-cleaner": "^1.3.0",
+    "nodemon": "^2.0.2",
+    "puppeteer": "^2.1.1",
+    "sqlite3": "^4.1.1"
+  }
+}
