@@ -20,6 +20,7 @@ async function scrapeProduct(url){
   browser.close()
   return {Img,Description,Price}
 }
+
   module.exports = {
     scrapeProduct
   }
