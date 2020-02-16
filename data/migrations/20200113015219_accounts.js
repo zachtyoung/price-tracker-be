@@ -7,7 +7,6 @@ exports.up = function(knex) {
       users.string('email').notNullable().unique();
       users.biginteger('phone').notNullable().unique();
       users.string('password').notNullable();
-      users.
     })
     .createTable('products', function(products) {
         products.increments('id');
