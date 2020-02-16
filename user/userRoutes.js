@@ -67,12 +67,8 @@ router.post ('/addProduct', (req, res) => {
     const user_id = req.body;
     const {url} = req.body
     user_id && url ?  db.insertUserProducts(user_id, url)
-    .then(hello =>{
-      const getInfo = async () => {
-        const result = await scrapeProduct(url)
+    .then(result =>{
         res.send(result)
-       }
-       getInfo();
         
     }) : res.status(400).json({ errorMessage: "Please provide a user Id and url for the product." })
    
