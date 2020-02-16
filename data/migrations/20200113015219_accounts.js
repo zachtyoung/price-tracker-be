@@ -7,10 +7,11 @@ exports.up = function(knex) {
       users.string('email').notNullable().unique();
       users.biginteger('phone').notNullable().unique();
       users.string('password').notNullable();
+      users.
     })
     .createTable('products', function(products) {
         products.increments('id');
-        products.string('url').notNullable();
+        products.string('url', 1024).notNullable();
         products.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       })
 };
