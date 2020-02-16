@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const restricted = require('../auth/auth-middleware');
 const router = express.Router();
 const puppeteer = require('puppeteer');
+const scrapers = require('./scrapers');
 
 router.get('/', (req,res) =>{
     db.get().then(users => {
@@ -101,7 +102,7 @@ router.get('/:id/products2', (req, res) =>{
         const getInfo2 = async () => {
           arr = []
           for (i = 0; i < products.length; i++){
-            var result = await scrapeProduct(products[i].url)
+            var result = await scrapers.scrapeProduct(products[i].url)
               arr.push(result)
             
           }
@@ -136,28 +137,7 @@ function genToken(user){
   }
   return token = jwt.sign(payload, secret, opttions)
 }
-async function scrapeProduct(url){
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(url)
-  const [el] = await page.$x('//*[@id="landingImage"]');
-  const src = await el.getProperty('src');
-  const Img = await src.jsonValue();
 
-  const [el2] = await page.$x('//*[@id="title_feature_div"]')
-  const txt = await el2.getProperty('textContent');
-  const rawTxt = await txt.jsonValue();
-  const filterdTxt = rawTxt.split(/[\n,\t]/).join("");
-  const Description = filterdTxt.trim();
-
-  const [el3] = await page.$x('//*[@id="priceblock_ourprice"]')
-  const txt2 = await el3.getProperty('textContent');
-  const Price = await txt2.jsonValue();
-  browser.close()
-  return({Img,Description,Price})
-
-  
-}
 
 
 
