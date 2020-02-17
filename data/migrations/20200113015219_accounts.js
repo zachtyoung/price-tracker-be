@@ -10,8 +10,8 @@ exports.up = function(knex) {
     })
     .createTable('products', function(products) {
         products.increments('id');
+        products.integer('user_id').unsigned().notNullable().references('id').inTable('users');
         products.string('url', 1024).notNullable();
-        products.integer('user_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       })
 };
 
