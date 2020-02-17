@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return knex('products').insert([
     { user_id: 1, url: 'https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Chocolate/dp/B000QSNYGI/ref=sr_1_4?crid=1TK0GYQK6001Q&keywords=whey+protein&qid=1581752962&sprefix=whey%2Caps%2C853&sr=8-4' },
     { user_id: 1, url: 'https://www.amazon.com/Dymatize-Protein-Isolate-Gourmet-Chocolate/dp/B002N6F2UW/ref=sxin_3_osp106-78587d52_cov?ascsubtag=78587d52-16a4-4e3e-b43a-33713ccb8c4b&creativeASIN=B002N6F2UW&crid=1TK0GYQK6001Q&cv_ct_cx=whey+protein&cv_ct_id=amzn1.osp.78587d52-16a4-4e3e-b43a-33713ccb8c4b&cv_ct_pg=search&cv_ct_wn=osp-search&keywords=whey+protein&linkCode=oas&pd_rd_i=B002N6F2UW&pd_rd_r=65fe616c-8ce4-4009-a59a-234c9d9d42e1&pd_rd_w=hAE9P&pd_rd_wg=XBnXi&pf_rd_p=62c00474-6fe0-420f-9956-a05256e04b43&pf_rd_r=WEVC4E4X4V0MB3GEEFPR&qid=1581752977&sprefix=whey%2Caps%2C853&sr=1-2-32a32192-7547-4d9b-b4f8-fe31bfe05040&tag=barbend0d-20' },
