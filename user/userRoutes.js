@@ -65,7 +65,7 @@ router.get('/:id/products', (req, res) =>{
 })
 router.post ('/addProduct', (req, res) => {
     const user_id = req.body;
-    const {url} = req.body
+    const url = req.body
     user_id && url ? db.insertUserProducts(user_id, url)
     .then(result =>{
         res.send(result)
