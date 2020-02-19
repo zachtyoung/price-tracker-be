@@ -53,14 +53,11 @@ router.get('/:id/products', (req, res) =>{
 
     db.getUserProducts(id)
     .then(products => {
-        if(products){
         res.status(200).json(products)
-        } else{
-            res.status(404).json({ message: "The product(s) with the specified ID does not exist." })
-        }
-    })
+        console.log(products)
+        })
     .catch(err =>{
-        res.status(500).json({ error: "The product information could not be retrieved." })
+        res.status(500).json({ error: err })
     })
 })
 router.post ('/addProduct', (req, res) => {

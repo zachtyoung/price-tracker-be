@@ -43,10 +43,10 @@ module.exports = {
       .del();
   }
   function getUserProducts(userId) {
-    return db('products as p')
-      .join('users as u', 'u.id', 'p.user_id')
-      .select('p.id', 'p.url')
-      .where('p.user_id', userId);
+    return db('products')
+      .join('users', 'users.id', 'products.user_id')
+      .select('products.id', 'products.url')
+      .where('products.user_id', userId);
   }
   function insertUserProducts(user_id, url){
       return db('products')
