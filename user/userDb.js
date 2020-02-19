@@ -57,7 +57,7 @@ module.exports = {
       return db('products')
       .insert({user_id, url})
       .then(id => {
-        return getByProductId(id)
+        return id
       });
   }
   function removeUserProducts(id){
