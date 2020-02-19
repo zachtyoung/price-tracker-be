@@ -50,7 +50,7 @@ module.exports = {
   }
   function insertUserProducts(user_id, url){
       return db('products')
-      .insert(user_id, url)
+      .insert({user_id, url})
       .then(ids => {
         return ids
       });
