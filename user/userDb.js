@@ -20,6 +20,11 @@ module.exports = {
       .where({ id })
       .first();
   }
+  function getByProductId(id) {
+    return db('products')
+      .where({ id })
+      .first();
+  }
   function getBy(filter) {
     return db('users').where(filter);
   }
@@ -51,8 +56,8 @@ module.exports = {
   function insertUserProducts(user_id, url){
       return db('products')
       .insert({user_id, url})
-      .then(ids => {
-        return ids
+      .then(id => {
+        return getByProductId(id)
       });
   }
   function removeUserProducts(id){
