@@ -56,7 +56,6 @@ module.exports = {
   function insertUserProducts(user_id, url){
       return db('products')
       .insert({user_id, url})
-      .returning(“id”)
   }
   function removeUserProducts(id){
       return db('products')
