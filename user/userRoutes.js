@@ -29,7 +29,6 @@ router.post('/register', (req, res) => {
   });
   router.post('/login', (req, res) => {
     let { phone, password } = req.body;
-  
     db.getBy({ phone })
       .first()
       .then(user => {
@@ -46,12 +45,6 @@ router.post('/register', (req, res) => {
       });
   });
 
-
-
-
-
-
-
 //Get info of product stored in the database
 //returns id of product and url
 
@@ -61,7 +54,6 @@ router.post('/register', (req, res) => {
 //return entire entry as response
 router.get('/:id/products', (req, res) =>{
     const {id} = req.params;
-
     db.getUserProducts(id)
     .then(products => {
         res.status(200).json(products)
@@ -70,14 +62,6 @@ router.get('/:id/products', (req, res) =>{
         res.status(500).json({ error: err })
     })
 })
-
-
-
-
-
-
-
-
 //inserts url and user ID directly to database
 // router.post ('/addProduct', (req, res) => {
 //     const {user_id} = req.body;
@@ -106,8 +90,6 @@ router.post ('/scrapeAndAdd', (req, res) => {
    getInfo2();
 })
 
-
-
 //deletes product in database by product ID
 router.delete('/product/:id', (req, res) => {
     const {id} = req.params;
@@ -121,47 +103,32 @@ router.delete('/product/:id', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
 //queries database for product and runs url through scraper => returns img_url, description, and price of product. 
 //NO info returned is stored in database
-router.get('/:id/products2', (req, res) =>{
-  const {id} = req.params;
-  db.getUserProducts(id)
-  .then(products => {
-      if(products){
-        const getInfo2 = async () => {
-          arr = []
-          for (i = 0; i < products.length; i++){
-            var result = await scrapers.scrapeProduct(products[i].url)
-              arr.push(result)
-          }
-          res.send(arr)
-         }
-         getInfo2();
-      } else{
-          res.status(404).json({ message: "The product(s) with the specified ID does not exist." })
-      }
-  })
-  .catch(err =>{
-      res.status(500).json({ error: "The product information could not be retrieved." })
-  })
-})
+// may be useful for running cron jobs
 
-
-
-
-
-
-
-
-
+// router.get('/:id/products2', (req, res) =>{
+//   const {id} = req.params;
+//   db.getUserProducts(id)
+//   .then(products => {
+//       if(products){
+//         const getInfo2 = async () => {
+//           arr = []
+//           for (i = 0; i < products.length; i++){
+//             var result = await scrapers.scrapeProduct(products[i].url)
+//               arr.push(result)
+//           }
+//           res.send(arr)
+//          }
+//          getInfo2();
+//       } else{
+//           res.status(404).json({ message: "The product(s) with the specified ID does not exist." })
+//       }
+//   })
+//   .catch(err =>{
+//       res.status(500).json({ error: "The product information could not be retrieved." })
+//   })
+// })
 
 
 module.exports = router;
