@@ -85,7 +85,7 @@ router.post ('/scrapeAndAdd', (req, res) => {
     result = {user_id:user_id, url:url,...result}
     db.insertUserProducts(result)
     .then(response =>
-      res.send(result)
+      res.send(response)
     )}
    getInfo2();
 })
