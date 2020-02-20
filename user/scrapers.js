@@ -6,19 +6,19 @@ async function scrapeProduct(url){
   await page.goto(url)
   const [el] = await page.$x('//*[@id="landingImage"]');
   const src = await el.getProperty('src');
-  const Img = await src.jsonValue();
+  const img_url = await src.jsonValue();
 
   const [el2] = await page.$x('//*[@id="title_feature_div"]')
   const txt = await el2.getProperty('textContent');
   const rawTxt = await txt.jsonValue();
   const filterdTxt = rawTxt.split(/[\n,\t]/).join("");
-  const Description = filterdTxt.trim();
+  const description = filterdTxt.trim();
 
   const [el3] = await page.$x('//*[@id="priceblock_ourprice"]')
   const txt2 = await el3.getProperty('textContent');
-  const Price = await txt2.jsonValue();
+  const price = await txt2.jsonValue();
   browser.close()
-  return {Img,Description,Price}
+  return {img_url,description,price}
 }
 
   module.exports = {
