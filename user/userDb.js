@@ -50,13 +50,15 @@ module.exports = {
   function getUserProducts(userId) {
     return db('products')
       .join('users', 'users.id', 'products.user_id')
-      .select('products.id', 'products.url')
+      .select('products.user_id','products.id', 'products.url', 'products.img_url', 'products.description', 'products.price')
       .where('products.user_id', userId);
   }
-  function insertUserProducts(user_id, url){
+  function insertUserProducts(item){
       return db('products')
-      .insert({user_id, url})
-      .returning('id')
+      .insert(item)
+      .then( id =>{
+        return getByProductId(id[0])
+      })
   }
   function removeUserProducts(id){
       return db('products')

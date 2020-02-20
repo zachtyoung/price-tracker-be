@@ -12,6 +12,9 @@ exports.up = function(knex) {
         products.increments('id');
         products.integer('user_id').unsigned().notNullable().references('id').inTable('users');
         products.string('url', 1024).notNullable();
+        products.string('img_url', 1024).notNullable();
+        products.string('description', 1024).notNullable();
+        products.string('price').notNullable();
       })
 };
 
