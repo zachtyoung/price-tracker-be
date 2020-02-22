@@ -56,9 +56,7 @@ module.exports = {
   function insertUserProducts(item){
       return db('products')
       .insert(item)
-      .then( id =>{
-        return getByProductId(id[0])
-      })
+      .returning('id')
   }
   function removeUserProducts(id){
       return db('products')
