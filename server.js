@@ -10,7 +10,6 @@ server.use(function(req, res, next) {
 });
 server.use('/users', userRouter);
 
-
 server.get('/', (req, res) => {
 
   res.send(`
