@@ -5,8 +5,8 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 const db = require('./user/userDb')
 
-var job = new CronJob('0 0 */1 * * *', function() {
-    console.log('every minute')
+
+    console.log('twilio.js running')
     db.getAllProducts()
     .then(products =>
         
@@ -41,8 +41,8 @@ var job = new CronJob('0 0 */1 * * *', function() {
 }})
         )
 
-  }, null, true, 'America/Los_Angeles');
-job.start()
+
+
 
 
     
