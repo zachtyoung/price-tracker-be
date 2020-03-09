@@ -10,10 +10,15 @@ module.exports = {
     insertUserProducts,
     removeUserProducts,
     getBy,
+    getAllProducts,
+    updateProducts
   };
 
   function get() {
     return db('users');
+  }
+  function getAllProducts(){
+    return db('products')
   }
   function getById(id) {
     return db('users')
@@ -50,15 +55,23 @@ module.exports = {
   function getUserProducts(userId) {
     return db('products')
       .join('users', 'users.id', 'products.user_id')
-      .select('products.user_id','products.id', 'products.url', 'products.img_url', 'products.description', 'products.price')
+      .select('products.user_id','products.id', 'products.url', 'products.img_url', 'products.description', 'products.price', 'products.target_price', 'products.notifications')
       .where('products.user_id', userId);
   }
   function insertUserProducts(item){
       return db('products')
       .insert(item)
+      .then( id =>{
+        return getByProductId(id[0])
+      })
   }
   function removeUserProducts(id){
       return db('products')
       .where('id', id)
       .del(); 
+  }
+  function updateProducts(id, changes) {
+    return db('products')
+      .where({ id })
+      .update(changes);
   }
