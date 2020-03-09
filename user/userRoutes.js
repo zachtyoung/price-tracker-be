@@ -80,9 +80,10 @@ router.get('/:id/products', (req, res) =>{
 router.post ('/scrapeAndAdd', (req, res) => {
   const {user_id} = req.body;
   const {url} = req.body
+  const {target_price} =req.body
   const getInfo2 = async () => {
     var result = await scrapers.scrapeProduct(url)
-    result = {user_id:user_id, url:url,...result}
+    result = {user_id:user_id, url:url, target_price:target_price,...result}
     db.insertUserProducts(result)
     .then(response =>
       res.send(response)
@@ -101,6 +102,37 @@ router.delete('/product/:id', (req, res) => {
         res.status(500).json({ error: "The user could not be removed" })
     })
 });
+
+router.put('/product/:id', (req, res) =>{
+  const {id} = req.params;
+  const changes = req.body;
+
+  changes? db.updateProducts(id, changes) .then(updated =>{
+      if(updated){
+          res.status(200).json(updated)
+      } else{
+          res.status(404).json({ message: "The product with the specified ID does not exist." })
+      }
+  }) .catch(err =>{
+      res.status(500).json({ error: "The product information could not be modified.", errorMessage:err })
+  }) : res.status(400).json({ errorMessage: "Please provide id and changes for the product." })
+})
+
+router.put('/:id', (req, res) =>{
+  const {id} = req.params;
+  const changes = req.body;
+
+  changes? db.update(id, changes) .then(updated =>{
+      if(updated){
+          res.status(200).json(updated)
+      } else{
+          res.status(404).json({ message: "The user with the specified ID does not exist." })
+      }
+  }) .catch(err =>{
+      res.status(500).json({ error: "The user information could not be modified.", errorMessage:err })
+  }) : res.status(400).json({ errorMessage: "Please provide id and changes for the user." })
+})
+
 
 
 //queries database for product and runs url through scraper => returns img_url, description, and price of product. 
