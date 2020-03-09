@@ -118,6 +118,7 @@ router.put('/product/:id', (req, res) =>{
   }) : res.status(400).json({ errorMessage: "Please provide id and changes for the product." })
 })
 
+
 router.put('/:id', (req, res) =>{
   const {id} = req.params;
   const changes = req.body;
