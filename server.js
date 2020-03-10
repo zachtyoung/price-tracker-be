@@ -2,6 +2,8 @@ const express = require('express'); // importing a CommonJS module
 
 const server = express();
 const userRouter = require('./user/userRoutes');
+const cors = require('cors')
+server.use(cors())
 server.use(express.json());
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
