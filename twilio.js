@@ -6,7 +6,6 @@ const db = require('./user/userDb')
 const scrapers = require('./user/scrapers.js');
 
 console.log("twilio.js running")
-
 db.getAllProducts()
 .then(products =>{
     products.forEach(el =>{
